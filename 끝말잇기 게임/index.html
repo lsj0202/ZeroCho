@@ -18,19 +18,27 @@
         const $button = document.querySelector('button');
         const $input = document.querySelector('input');
         const $word = document.querySelector('#word');
+        const $order = document.querySelector('#order');
         let word; //제시어
         let newWord; // 새로 입력한 단어
 
         const onClickButton = () => {
-            if(!word){
-                //제시어 비었음
-                word = newWord; //입력한 단어가 제시어가 된다.
+            if(!word || word[word.length-1] === newWord[0]){
+                word = newWord;
                 $word.textContent = word;
-                $input.value = ' '; //input은 textContent가 아니고 value를 통해 값을 바꿔야한다.
-            } else{
-                //제시어 비어있지 않음
-
+                const order = Number($order.textContent);
+                if(order + 1 > number){
+                    $order.textContent = 1;
+                }
+                else{
+                    $order.textContent = order + 1;
+                }
             }
+            else{
+                alert('올바르지 않는 단어입니다.');
+            }
+            $input.value = '';
+            $input.focus();
         };
         const onInput = () => {
             newWord = event.target.value;
