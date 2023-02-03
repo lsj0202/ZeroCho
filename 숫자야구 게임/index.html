@@ -17,6 +17,23 @@
         const $form = document.querySelector('#form');
         const $input = document.querySelector('#input');
         const $logs = document.querySelector('#logs');
+
+        const numbers = [];
+        for(let n = 0; n < 9; n +=1){
+            number.push(n+1);
+        }
+        let n = 1;
+        //while(n < 10){
+        //    number.push(n+1);
+        //    n++;
+        //}
+        const answer = [];
+        for(let n = 0; n < 4; n++){
+            const index = Math.floor(Math.random() * 9) // 0~8 정수
+            answer.push(numbers[index]);
+            numbers.splice(index,1); 
+        }
+        console.log(answer);
     </script>
 </body>
 </html>
