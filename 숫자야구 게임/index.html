@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숫자야구 게임</title>
 </head>
+<style>
+
+</style>
 <body>
     <form id="form">
-        <input type="text" id="input">
+        <input required type="text" id="input" type="text" value="">
         <button>확인</button>
     </form>
     <div id="logs"></div>
@@ -19,21 +22,89 @@
         const $logs = document.querySelector('#logs');
 
         const numbers = [];
-        for(let n = 0; n < 9; n +=1){
-            number.push(n+1);
+        for(let n = 0; n < 9; n ++){
+            numbers.push(n+1);
         }
-        let n = 1;
+        //let n = 1;
         //while(n < 10){
         //    number.push(n+1);
         //    n++;
         //}
         const answer = [];
-        for(let n = 0; n < 4; n++){
-            const index = Math.floor(Math.random() * 9) // 0~8 정수
+        for(let n = 0; n < 4; n++){ //네 번 반복
+            const index = Math.floor(Math.random() * (numbers.length)); // 0~8 정수
             answer.push(numbers[index]);
             numbers.splice(index,1); 
         }
         console.log(answer);
+
+        const tries =  [];
+        function checkInput(input) {
+            if(input.length !== 4){
+                return alert('4자리 숫자를 입력해 주세요');
+            }
+            if(new Set(input).size !== 4){
+                return alert('중복되지 않게 입력해 주세요');
+            }
+            if(tries.includes(input)){
+                return alert('이미 시도한 값 입니다.');
+            }
+            return true;
+        }; // 검사하는 코드
+
+        let out = 0;
+        let outSet = 0;
+
+        $form.addEventListener("submit", (event) => {
+            event.preventDefault(); //기본동작 막기 form, a 태그
+            const value = $input.value;
+            $input.value = '';
+            $input.focus();
+            if(!checkInput(value)){
+                return;
+            }
+            //입력값이 문제가 없을 때
+            if(answer.join('') === value){
+                $logs.textContent = '홈런';
+                return;
+            }
+            if(tries.length >= 9){
+                const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+                $logs.append(message);
+                return;
+            }
+
+            let strike = 0;
+            let ball = 0;
+            //answer : 3146 value : 1234
+            for(let i = 0; i < answer.length; i++){
+                const index = value.indexOf(answer[i]);
+                if(index > -1){
+                    if(index === i){
+                        strike += 1;
+                    } else{
+                        ball += 1;
+                    }
+                }
+            }
+
+            if(strike === 0 && ball === 0){
+                out ++;
+                outSet ++;
+                $logs.append(`${value}: ${outSet}아웃`, document.createElement('br'));
+            }
+            else{
+                $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br')); //textContent 와 innerHTML 을 사용해도 된다.
+            }
+
+            if(out === 3){
+                const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+                $logs.append(message);
+                return;
+            }
+
+            tries.push(value);
+        });
     </script>
 </body>
 </html>
