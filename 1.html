@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <style>
+        input{
+            padding:10px 20px;
+            margin:5px;
+        }
+        button{
+            padding:8px 20px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input id="id" type="text" placeholder="아이디를 입력하세요."><br>
+        <input id="password" type="password">
+        <button id="login">로그인</button>
+    </form>
+    <script>
+        $id = document.querySelector('#id');
+        $password = document.querySelector('#password');
+        $login = document.querySelector('#login');
+        let err = 0;
+
+        const logIn = () => {
+            if($id.value == "dltkdwls"){
+                if($password.value == "lee"){
+                    alert('로그인 성공');
+                } else{
+                    alert('아이디와 비밀번호를 다시 입력해 주세요');
+                    err++;
+                }
+            }
+            else{
+                alert('존재하지 않는 계정입니다.');
+            }
+
+            if(arr >= 5){
+                alert('계정탐색을 권장드립니다.');
+            }
+        };
+
+        $login.addEventListener('click', logIn);
+    </script>
+</body>
+</html>
