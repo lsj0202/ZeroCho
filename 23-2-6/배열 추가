@@ -1,0 +1,15 @@
+var li = ['a','b','c','d','e','f'];
+
+li.push('하이');
+=> [a,b,c,d,e,f,하이]
+
+li.concat('이상진');
+=> [이상진,a,b,c,d,e,f,하이]
+
+li.splice(1,0, 'd');
+=> [a,d,b,c,d,e,f,하이] 1번째 index에 d가 추가됨
+
+li.splice(1,1, 'x','y'); 1,1일 경우 하나를 삭제하고 x,y 를 집어 넣는다.
+=> [a,x,y,b,c,d,e,f,하이]
+
+
