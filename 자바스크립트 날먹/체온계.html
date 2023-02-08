@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체온계</title>
+</head>
+<body>
+    <script>
+        const a = prompt('체온을 입력하세요');
+        function tem(a){
+            if(a <= 34.0){
+                document.write('저온');
+            }
+            else if(a < 37.0 && a > 34.0){
+                document.write('정상');
+            }
+            else if(a >= 37.0){
+                document.write('고온');
+            }
+        }
+        tem(a);
+
+    </script>
+</body>
+</html>
